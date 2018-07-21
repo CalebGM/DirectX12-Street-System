@@ -194,8 +194,12 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="Common\d3dx12.h" />
     <ClInclude Include="Common\DeviceResources.h" />
+    <ClInclude Include="GameObjects\RoadObject.h" />
+    <ClInclude Include="GameObjects\TrafficLightObject.h" />
     <ClInclude Include="GameObjects\CarObject.h" />
     <ClInclude Include="GameObjects\GameObject.h" />
+    <ClInclude Include="Meshes\RoadMesh.h" />
+    <ClInclude Include="Meshes\TrafficLightMesh.h" />
     <ClInclude Include="Meshes\CarMesh.h" />
     <ClInclude Include="Meshes\MeshObject.h" />
     <ClInclude Include="_3DGraphicsTestMain.h" />
@@ -208,8 +212,12 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Common\DeviceResources.cpp" />
+    <ClCompile Include="GameObjects\RoadObject.cpp" />
+    <ClCompile Include="GameObjects\TrafficLightObject.cpp" />
     <ClCompile Include="GameObjects\CarObject.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
+    <ClCompile Include="Meshes\RoadMesh.cpp" />
+    <ClCompile Include="Meshes\TrafficLightMesh.cpp" />
     <ClCompile Include="Meshes\CarMesh.cpp" />
     <ClCompile Include="Meshes\MeshObject.cpp" />
     <ClCompile Include="_3DGraphicsTestMain.cpp" />

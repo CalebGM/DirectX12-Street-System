@@ -12,9 +12,35 @@ using namespace Concurrency;
 // Loads and initializes application assets when the application is loaded.
 _3DGraphicsTestMain::_3DGraphicsTestMain()
 {
+	m_trafficLight = ref new TrafficLightObject(XMFLOAT3(1.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 0.0f, 1.0f), "Red");
+	m_gameObjects.push_back(m_trafficLight);
+	m_trafficLightObjects.push_back(m_trafficLight);
 
-	m_renderObjects.push_back(ref new CarObject(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(2.0f, 0.0f, 0.0f)));
-	m_renderObjects.push_back(ref new CarObject(XMFLOAT3(-1.0f, 0.0f, 0.0f), XMFLOAT3(2.0f, 0.0f, 0.0f)));
+	m_trafficLight = ref new TrafficLightObject(XMFLOAT3(7.0f, 0.0f, 0.0f), XMFLOAT3(7.0f, 0.0f, 1.0f), "Green");
+	m_gameObjects.push_back(m_trafficLight);
+	m_trafficLightObjects.push_back(m_trafficLight);
+	
+	m_car = ref new CarObject(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 0.0f, 0.0f));
+	m_gameObjects.push_back(m_car);
+	m_carObjects.push_back(m_car);
+	
+	m_car = ref new CarObject(XMFLOAT3(-1.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 0.0f, 0.0f));
+	m_gameObjects.push_back(m_car);
+	m_carObjects.push_back(m_car);
+
+	m_car = ref new CarObject(XMFLOAT3(-2.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 0.0f, 0.0f));
+	m_gameObjects.push_back(m_car);
+	m_carObjects.push_back(m_car);
+
+	m_car = ref new CarObject(XMFLOAT3(-10.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 0.0f, 0.0f));
+	m_gameObjects.push_back(m_car);
+	m_carObjects.push_back(m_car);
+
+	m_car = ref new CarObject(XMFLOAT3(-12.0f, 0.0f, 0.0f), XMFLOAT3(20.0f, 0.0f, 0.0f));
+	m_gameObjects.push_back(m_car);
+	m_carObjects.push_back(m_car);
+
+	m_gameObjects.push_back(ref new RoadObject(XMFLOAT3(0.0f, -0.25f, 0.0f), XMFLOAT3(20.0f, -0.25f, 0.0f)));
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	// e.g. for 60 FPS fixed timestep update logic, call:
@@ -29,7 +55,7 @@ void _3DGraphicsTestMain::CreateRenderers(const std::shared_ptr<DX::DeviceResour
 {
 	// TODO: Replace this with your app's content initialization.
 	m_sceneRenderer = std::unique_ptr<Sample3DSceneRenderer>(new Sample3DSceneRenderer(deviceResources));
-	m_sceneRenderer->ReceiveGameObjects(m_renderObjects);
+	m_sceneRenderer->ReceiveGameObjects(m_gameObjects);
 	OnWindowSizeChanged();
 }
 
@@ -40,7 +66,74 @@ void _3DGraphicsTestMain::Update()
 	m_timer.Tick([&]()
 	{
 		// TODO: Replace this with your app's content update functions.
-		m_sceneRenderer->Update(m_timer);
+		
+		//m_sceneRenderer->Update(m_timer);
+		m_angle += static_cast<float>(m_timer.GetElapsedSeconds() * 0.002);
+		for (auto object = m_trafficLightObjects.begin(); object != m_trafficLightObjects.end(); object++)
+		{
+			(*object)->UpdateTime(m_timer.GetElapsedSeconds());
+		}
+		for (auto object = m_carObjects.begin(); object != m_carObjects.end(); object++)
+		{
+			bool accelerate = true;
+			float carPosition = (*object)->Position().x;
+			
+			if (object != m_carObjects.begin())
+			{
+				auto object2 = object - 1;
+				if (abs((*object2)->Position().x - carPosition) < 0.9)
+				{
+					(*object)->Stop();
+					accelerate = false;
+				}
+				else if (abs((*object2)->Position().x - carPosition) < 1.3)
+				{
+					(*object)->SlowToStop();
+					accelerate = false;
+				}
+			}
+			
+
+			auto trafficLight = m_trafficLightObjects.begin();
+			while ((*trafficLight)->Position().x - carPosition < 0 && (trafficLight + 1) != m_trafficLightObjects.end())
+			{
+				trafficLight++;
+			}
+
+			double distance = (*trafficLight)->Position().x - carPosition;
+			if (distance > 0)
+			{
+				if ((*trafficLight)->Color() == "Red")
+				{
+					if (distance < 1.2)
+					{
+						(*object)->Stop();
+						accelerate = false;
+					}
+					else if (distance < 1.7)
+					{
+						(*object)->SlowToStop();
+						accelerate = false;
+					}
+				}
+				else if ((*trafficLight)->Color() == "Yellow" && distance < 1.7)
+				{
+					double ans = (*object)->Velocity().x * (*trafficLight)->TimeToRed() * m_timer.GetFramesPerSecond();
+					if ((*object)->Velocity().x * (*trafficLight)->TimeToRed() * m_timer.GetFramesPerSecond() < distance)
+					{
+						(*object)->SlowToStop();
+						accelerate = false;
+					}
+				}
+			}
+			
+			
+			if (accelerate)
+			{
+				(*object)->AccelerateToMax();
+			}
+			(*object)->Position((*object)->VectorPosition() + (*object)->VectorVelocity());
+		}
 	});
 }
 

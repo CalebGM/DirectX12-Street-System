@@ -1,11 +1,11 @@
 #pragma once
 #include "GameObject.h"
 
-ref class CarObject : public GameObject
+ref class RoadObject : public GameObject
 {
 internal:
-	CarObject();
-	CarObject(DirectX::XMFLOAT3 position, DirectX::XMFLOAT3 target);
+	RoadObject();
+	RoadObject(DirectX::XMFLOAT3 position, DirectX::XMFLOAT3 target);
 	void Initialize(DirectX::XMFLOAT3 position, DirectX::XMFLOAT3 target);
 	void Target(DirectX::XMFLOAT3 target);
 	DirectX::XMFLOAT3 Target();

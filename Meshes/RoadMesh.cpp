@@ -1,11 +1,11 @@
 #include "pch.h"
-#include "CarMesh.h"
+#include "RoadMesh.h"
 #include "..\Content\ShaderStructures.h"
 using namespace _3DGraphicsTest;
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
-CarMesh::CarMesh(
+RoadMesh::RoadMesh(
 	std::shared_ptr<DX::DeviceResources> deviceResources, 
 	ComPtr<ID3D12GraphicsCommandList> commandList, 
 	ComPtr<ID3D12PipelineState> pipelineState
@@ -17,14 +17,10 @@ CarMesh::CarMesh(
 
 	VertexPositionColor cubeVertices[] =
 	{
-		{ XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(0.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(-0.5f, -0.5f,  0.5f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(-0.5f,  0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT3(-0.5f,  0.5f,  0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-		{ XMFLOAT3(0.9f, -0.5f, -0.5f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(0.9f, -0.5f,  0.5f), XMFLOAT3(1.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(0.5f,  0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 0.0f) },
-		{ XMFLOAT3(0.5f,  0.5f,  0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+		{ XMFLOAT3(-25.0f,  0.0f, -0.7f), XMFLOAT3(0.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-25.0f,  0.0f,  0.7f), XMFLOAT3(0.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3( 25.0f,  0.0f, -0.7f), XMFLOAT3(0.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3( 25.0f,  0.0f,  0.7f), XMFLOAT3(0.0f, 0.0f, 0.0f) },
 	};
 
 	const UINT vertexBufferSize = sizeof(cubeVertices);
@@ -66,23 +62,8 @@ CarMesh::CarMesh(
 
 	unsigned short cubeIndices[] =
 	{
-		0, 2, 1, // -x
+		0, 2, 1,
 		1, 2, 3,
-
-		4, 5, 6, // +x
-		5, 7, 6,
-
-		0, 1, 5, // -y
-		0, 5, 4,
-
-		2, 6, 7, // +y
-		2, 7, 3,
-
-		0, 4, 6, // -z
-		0, 6, 2,
-
-		1, 3, 7, // +z
-		1, 7, 5,
 	};
 
 	const UINT indexBufferSize = sizeof(cubeIndices);

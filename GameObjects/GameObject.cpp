@@ -5,7 +5,7 @@
 GameObject::GameObject()
 {
 	m_position = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	m_velocity = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	m_velocity = XMFLOAT3(0.01f, 0.0f, 0.0f);
 	m_defaultXAxis = XMFLOAT3(1.0f, 0.0f, 0.0f);
 	m_defaultYAxis = XMFLOAT3(0.0f, 1.0f, 0.0f);
 	m_defaultZAxis = XMFLOAT3(0.0f, 0.0f, 1.0f);

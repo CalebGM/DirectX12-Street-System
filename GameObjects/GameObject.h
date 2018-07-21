@@ -9,13 +9,13 @@ ref class GameObject
 internal:
 	GameObject();
 
-	void Render(
+	virtual void Render(
 		Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList,
 		UINT8* mappedConstantBuffer,
 		UINT objectOffset
 	);
 
-	void Mesh(_In_ MeshObject^ mesh);
+	virtual void Mesh(_In_ MeshObject^ mesh);
 
 	void Position(XMFLOAT3 position);
 	void Position(XMVECTOR position);

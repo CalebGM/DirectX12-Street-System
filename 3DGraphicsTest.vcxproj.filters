@@ -85,6 +85,18 @@
     <ClCompile Include="Meshes\MeshObject.cpp">
       <Filter>Meshes</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjects\TrafficLightObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes\TrafficLightMesh.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes\RoadMesh.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\RoadObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -101,6 +113,18 @@
     </ClInclude>
     <ClInclude Include="Meshes\MeshObject.h">
       <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\TrafficLightObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Meshes\TrafficLightMesh.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Meshes\RoadMesh.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\RoadObject.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

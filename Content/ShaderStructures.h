@@ -16,4 +16,5 @@ namespace _3DGraphicsTest
 		DirectX::XMFLOAT3 pos;
 		DirectX::XMFLOAT3 color;
 	};
+
 }

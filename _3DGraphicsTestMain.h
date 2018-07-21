@@ -20,14 +20,19 @@ namespace _3DGraphicsTest
 		void OnSuspending();
 		void OnResuming();
 		void OnDeviceRemoved();
-		std::vector<GameObject^> RenderObjects() { return m_renderObjects; }
+		//std::vector<GameObject^> RenderObjects() { return m_gameObjects; }
 
 	private:
 		// TODO: Replace with your own content renderers.
 		std::unique_ptr<Sample3DSceneRenderer> m_sceneRenderer;
 
 		// Rendering loop timer.
-		DX::StepTimer				m_timer;
-		std::vector<GameObject^>	m_renderObjects;
+		DX::StepTimer						m_timer;
+		std::vector<GameObject^>			m_gameObjects;
+		std::vector<TrafficLightObject^>	m_trafficLightObjects;
+		std::vector<CarObject^>				m_carObjects;
+		CarObject^							m_car;
+		TrafficLightObject^					m_trafficLight;
+		float								m_angle;
 	};
 }

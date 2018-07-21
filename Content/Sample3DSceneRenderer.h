@@ -4,6 +4,8 @@
 #include "ShaderStructures.h"
 #include "..\Common\StepTimer.h"
 #include "..\GameObjects\CarObject.h"
+#include "..\GameObjects\TrafficLightObject.h"
+#include "..\GameObjects\RoadObject.h"
 
 namespace _3DGraphicsTest
 {
@@ -50,7 +52,7 @@ namespace _3DGraphicsTest
 		ModelViewProjectionConstantBuffer					m_constantBufferData;
 		UINT8*												m_mappedConstantBuffer[DX::c_frameCount];
 		UINT												m_cbvDescriptorSize;
-		std::vector<GameObject^>							m_gameObjects;
+		std::vector<GameObject^>							m_renderObjects;
 		D3D12_RECT											m_scissorRect;
 		std::vector<byte>									m_vertexShader;
 		std::vector<byte>									m_pixelShader;

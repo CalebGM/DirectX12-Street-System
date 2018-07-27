@@ -34,7 +34,7 @@ The following guides and tutorials helped me a lot with DirectX 12.
 
 [A video tutorial by Microsoft. DirectX 11 unfortunately, but helpful in organizing game objects and meshes.](https://mva.microsoft.com/en-us/training-courses/introduction-to-c-and-directx-game-development-jump-start-8824?l=zPwh4gx2_9204984382)
 
-Two lengthy guides on DirectX 12 that helped me tremenously in understanding what all the API calls do:
+Two lengthy guides on DirectX 12 that helped me tremendously in understanding what all the API calls do:
 
 [Lessons 1 and 2 of this guide.](https://www.3dgep.com/learning-directx12-1)
 
